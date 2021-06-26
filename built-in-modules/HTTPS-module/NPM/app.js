@@ -17,6 +17,10 @@ manual approach (create package.json in the root, create properties ext...)
 npm init (step by step, press enter to skip)
 npm init -y (everything default)
 
-
+to uninstall any package => npm uninstall <package_name>
 
 */
+
+// nodemon is a module for restart the app.js file... something like live-server save and refresh...
+
+console.log('done');
