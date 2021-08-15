@@ -28,12 +28,12 @@ const second = readFileSync('../content/second.txt', 'utf8')
 // meaning of flag:a is append the data in that file...
 
 // if any error when appending data or any kind of that... then use try-catch...
-try{
+try {
     // writeFileSync('./content/result-sync.txt', `here is your result : ${first}, ${second}`, { flag: 'ad' });
     writeFileSync('../content/result-sync.txt', `here is your result : ${first}, ${second}`, { flag: 'a' });
 }
-catch(error){
-    console.log('Error : '+error);
+catch (error) {
+    console.log('Error : ' + error);
 }
 
 

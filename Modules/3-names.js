@@ -10,7 +10,7 @@ const smith = 'smith';
 module.exports = { john, smith };
 
 // In one file I can not exports more than one module...
-module.exports = { abhi };
+// module.exports = { abhi };
 // this is wrong...
 
 console.log(module);
