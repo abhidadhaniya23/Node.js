@@ -1,0 +1,29 @@
+{
+  "name": "node.js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "static": "nodemon ./static-files/server.js",
+    "middleware": "nodemon ./middleware/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abhidadhaniya23/Node.js.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abhidadhaniya23/Node.js/issues"
+  },
+  "homepage": "https://github.com/abhidadhaniya23/Node.js#readme",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}
