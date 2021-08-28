@@ -1,0 +1,1 @@
+const fs = require('fs');const oldPath = 'style.css';const newPath = './public/css/style.css';fs.rename(oldPath, newPath, function (err) {if (err) throw err;console.log('Successfully moved successfully')});
