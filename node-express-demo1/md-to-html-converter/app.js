@@ -1,11 +1,14 @@
 // Require express and create an instance of it
 const express = require('express');
 const fs = require('fs');
+const path = require('path');
 var markdown = require("markdown-js");
 const app = express();
 
 const localHost = '127.0.0.1'
 const port = 3000
+
+app.use(express.static('/public'));
 
 // on the request to root (localhost:3000/)
 // app.get('/', function (req, res) {
@@ -17,27 +20,27 @@ app.get('/', function (req, res) {
     return res.end('<h1>Hello, Secure World!</h1>');
 });
 
-app.get('/test', function (req, res) {
-    /*
-    // var path = __dirname + '/files/README.md';
-    var file = fs.readFile('../node-express-demo1/files/README.md', function (err, data) {
-        if (err) {
-            // console.log(path);
-            console.log(err)
-        }
-        return data.toString()
-    })
-    res.send(marked(file))
-    */
+app.get('/test', (req, res) => {
 
-    var str = fs.readFileSync("./files/README.md", "utf8");
-    
-    var result = markdown.makeHtml(str);
+    let str = fs.readFileSync("./files/README.md", "utf8");
+
+    let result = markdown.makeHtml(str);
 
     res.header('Content-type', 'text/html');
-    return res.end(`${result}`);
-    
-    console.log(result);
+
+    fs.writeFile(path.join(__dirname + '/public/index.ejs'), result, { flag: 'a+' }, err => {
+        if (err) {
+            console.log(err);
+        }
+        // console.log('Successfully Done!');
+    })
+
+    // res.end(`${result}`);
+
+    // await res.render('/static/index.html');
+
+    res.render('index.ejs');
+
 })
 
 // On localhost:3000/welcome
