@@ -34,6 +34,7 @@ app.post('/', async (req, res) => {
 			name: savedUser.name,
 			email: savedUser.email
 		})
+		console.log(req);
 	}
 	catch (err) {
 		res.status(400).send(err);

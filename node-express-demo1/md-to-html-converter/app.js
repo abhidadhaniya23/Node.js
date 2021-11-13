@@ -2,7 +2,7 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
-var markdown = require("markdown-js");
+const markdown = require("markdown").markdown;
 const app = express();
 
 const localHost = '127.0.0.1'
@@ -20,18 +20,19 @@ app.get('/', function (req, res) {
     return res.end('<h1>Hello, Secure World!</h1>');
 });
 
-app.get('/test', (req, res) => {
+app.get('/test', async (req, res) => {
 
     let str = fs.readFileSync("./files/README.md", "utf8");
 
-    let result = markdown.makeHtml(str);
+    let result = markdown.toHTML(str);
 
-    res.header('Content-type', 'text/html');
+    // res.header('Content-type', 'text/html');
 
-    fs.writeFile(path.join(__dirname + '/public/index.ejs'), result, { flag: 'a+' }, err => {
+    await fs.writeFile(path.join(__dirname + '/public/index.ejs'), result, err => {
         if (err) {
             console.log(err);
         }
+        res.render('index.ejs');
         // console.log('Successfully Done!');
     })
 
@@ -39,7 +40,6 @@ app.get('/test', (req, res) => {
 
     // await res.render('/static/index.html');
 
-    res.render('index.ejs');
 
 })
 

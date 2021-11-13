@@ -1,4 +1,6 @@
 *node_modules
 *exe
 *txt
-# *json
+*.env
+/mailserder
+/Contact-Form
