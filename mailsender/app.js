@@ -1,15 +1,16 @@
-var nodemailer = require('nodemailer');
+require('dotenv').config()
+const nodemailer = require('nodemailer');
 
-var transporter = nodemailer.createTransport({
+const transporter = nodemailer.createTransport({
     host: "smtp.mailtrap.io",
     port: 2525,
     auth: {
-        user: "29384aa2f283f0",
-        pass: "62263611274fdb"
+        user: process.env.USER,
+        pass: process.env.PASS
     }
 });
 
-var mailOptions = {
+const mailOptions = {
     from: 'dadhaniyaabhi23@gmail.com',
     to: 'abhidadhaniya23@gmail.com',
     subject: 'Sending Email using Node.js',
