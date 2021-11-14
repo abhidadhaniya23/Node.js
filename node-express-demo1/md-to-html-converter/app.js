@@ -1,14 +1,15 @@
 // Require express and create an instance of it
 const express = require('express');
+const showdown = require('showdown')
 const fs = require('fs');
 const path = require('path');
-const markdown = require("markdown").markdown;
+// const markdown = require("markdown").markdown;
 const app = express();
 
 const localHost = '127.0.0.1'
 const port = 3000
 
-app.use(express.static('/public'));
+app.use(express.static('public'));
 
 // on the request to root (localhost:3000/)
 // app.get('/', function (req, res) {
@@ -22,11 +23,11 @@ app.get('/', function (req, res) {
 
 app.get('/test', async (req, res) => {
 
+    let converter = new showdown.Converter()
+
     let str = fs.readFileSync("./files/README.md", "utf8");
 
-    let result = markdown.toHTML(str);
-
-    // res.header('Content-type', 'text/html');
+    let result = converter.makeHtml(str);
 
     await fs.writeFile(path.join(__dirname + '/public/index.ejs'), result, err => {
         if (err) {
@@ -35,11 +36,6 @@ app.get('/test', async (req, res) => {
         res.render('index.ejs');
         // console.log('Successfully Done!');
     })
-
-    // res.end(`${result}`);
-
-    // await res.render('/static/index.html');
-
 
 })
 

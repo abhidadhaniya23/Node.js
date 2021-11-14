@@ -1,12 +1,17 @@
-# **AWESOME CHEAT SHEETS**
+const express = require('express')
+
+const showdown = require('showdown'),
+	converter = new showdown.Converter(),
+	text = `
+	# **AWESOME CHEAT SHEETS**
 
 ## ![](https://github.com/Youth-Avenue-2021/cheat-sheet.github.io/raw/master/photos/gif.GIF)
 
 #### **DESCRIPTION**
 
 Cheat sheets are brief description of notes for a quick revision.
-This project deals with various cheat sheets of `HTML`, `JAVASCRIPT`, `CSS`, `PYTHON` and many more.
-It not only covers programming languages but few keyboard shortcuts for various editors like `VISUAL STUDIO CODE`, `SUBLIME`, etc.
+This project deals with various cheat sheets of and many more.
+It not only covers programming languages but few keyboard shortcuts for various editors lik etc.
 The list of library functions of C & Python is also attached.
 Few snippets of codes are also added in HTML & CSS which you can directly use to build up your own projects.
 Besides just viewing the sheets, the viewer can also download the required cheat sheets.
@@ -28,7 +33,7 @@ Tap on the following to directly go to the website:
 
 #### **INSTALLATION**
 
-> hello friends i want to tell you some important things
+> hello friends i want to tell you something important things
 
 ---
 
@@ -60,49 +65,22 @@ Clone this repository by copying the following clone url (https://github.com/You
 
 #### **PROJECT BUILD-UP**
 
--   [ ] hello
--   [x] unknown
+\`\`\`javascript
+// Load the full build.
+var _ = require("lodash");
+// Load the core build.
+var _ = require("lodash/core");
+// Load the FP build for immutable auto-curried iteratee-first data-last methods.
+var fp = require("lodash/fp");
 
-```javascript
-// Require express and create an instance of it
-const express = require("express");
-const showdown = require("showdown");
-const fs = require("fs");
-const path = require("path");
-// const markdown = require("markdown").markdown;
-const app = express();
+// Load method categories.
+var array = require("lodash/array");
+var object = require("lodash/fp/object");
 
-const localHost = "127.0.0.1";
-const port = 3000;
-
-app.use(express.static("public"));
-
-// on the request to root (localhost:3000/)
-// app.get('/', function (req, res) {
-//     res.send('<b>My</b> first express http server');
-// });
-
-app.get("/", function (req, res) {
-    res.header("Content-type", "text/html");
-    return res.end("<h1>Hello, Secure World!</h1>");
-});
-
-app.get("/test", async (req, res) => {
-    let converter = new showdown.Converter();
-
-    let str = fs.readFileSync("./files/README.md", "utf8");
-
-    let result = converter.makeHtml(str);
-
-    await fs.writeFile(path.join(__dirname + "/public/index.ejs"), result, (err) => {
-        if (err) {
-            console.log(err);
-        }
-        res.render("index.ejs");
-        // console.log('Successfully Done!');
-    });
-});
-```
+// Cherry-pick methods for smaller browserify/rollup/webpack bundles.
+var at = require("lodash/at");
+var curryN = require("lodash/fp/curryN");
+\`\`\`
 
 ---
 
@@ -114,3 +92,20 @@ All the information and data added in the project are either taken from google o
 ---
 
 ##### HAPPY CODING :)
+
+	`,
+	html = converter.makeHtml(text);
+
+
+const app = express()
+
+const port = 3000
+
+app.get('/', (req, res) => {
+	console.log(html);
+	res.end(html)
+})
+
+app.listen(port, () => {
+	console.log(`Example app listening at http ://localhost:${port}`)
+})

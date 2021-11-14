@@ -6,15 +6,42 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Readme To HTML COnverter</title>
+    <link rel="stylesheet" href="prism/prism.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
         * {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Inter', sans-serif;
+        }
+
+        @font-face {
+            font-family: CascadiaMono;
+            src: url('font/CascadiaMono.woff2');
+        }
+
+        ::selection {
+            color: white;
+            background: var(--primary-color);
+        }
+
+        :root {
+            --code-font: CascadiaMono, sans-serif;
+            --primary-color: #0af;
+            --light-primary-color: rgba(125, 212, 255, 0.5);
+            --dark-primary: rgb(0, 151, 226);
+            --hover-primary: rgb(75, 195, 255);
+            --text-color: rgb(80, 80, 80);
         }
 
         body {
-            background: #e9fbff;
+            background: rgb(251, 251, 251);
+        }
+
+        .main-body {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
         }
 
         img {
@@ -27,18 +54,38 @@
         }
 
         p {
-            color: rgb(27, 27, 27);
-            line-height: 1.7rem;
+            color: var(--text-color);
+            line-height: 2rem;
+            font-size: 1.189rem;
         }
 
         h1 {
-            color: rgb(0, 85, 85);
+            color: var(--dark-primary);
             text-align: center;
         }
 
-        h2,
+        h1 {
+            font-size: 2.7rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+        }
+
+        h3 {
+            font-size: 2.3rem;
+        }
+
         h4 {
-            color: teal;
+            font-size: 1.7rem;
+        }
+
+        h5 {
+            font-size: 1.6rem;
+        }
+
+        h6 {
+            font-size: 1.5rem;
         }
 
         h2,
@@ -46,7 +93,9 @@
         h4,
         h5,
         h6 {
-            margin: 15px 0 -10px 0;
+            color: var(--dark-primary);
+            font-weight: 600;
+            margin: 1.5rem 0 -.9rem 0;
         }
 
         hr {
@@ -54,29 +103,108 @@
         }
 
         a {
-            color: seagreen;
+            font-weight: 500;
+            color: var(--primary-color);
             text-decoration: none;
-            transition: 0.4s ease;
+            transition: 0.3s ease;
             padding: .2rem .4rem;
             border-radius: 4px;
+            position: relative;
+            z-index: 1;
+        }
+
+        a::before {
+            position: absolute;
+            content: '';
+            height: 2px;
+            bottom: 4px;
+            transform: skew(-40deg);
+            margin: 0 auto;
+            padding: 0 5px;
+            left: 0;
+            right: 0;
+            width: 80%;
+            background: var(--light-primary-color);
+            transition: 0.3s ease;
+            z-index: -1;
+        }
+
+        a:hover::before {
+            bottom: 2px;
+            height: 25px;
+            width: 100%;
         }
 
         a:hover {
-            background: teal;
-            color: whitesmoke;
+            color: var(--dark-primary);
         }
 
         .content {
-            max-width: 60rem;
-            padding: 1rem 5rem;
+            max-width: 80rem;
+            padding: 3rem 5rem 5rem;
+            margin: 0 40px;
+            box-shadow: 0 4px 24px 7px rgb(0 0 0 / 4%), 0 12px 64px 1px rgb(0 0 0 / 10%);
+            /* box-shadow: 0 8px 60px 0 rgb(0 0 0 / 11%), 0 12px 90px 0 rgb(0 0 0 / 11%); */
         }
 
         code {
-            margin: 4px;
-            padding: 3px;
-            background: rgb(161, 255, 208);
-            color: rgb(0, 56, 24);
+            padding: 1px 3px;
+            background: rgb(230, 230, 230);
+            color: rgb(39, 39, 39);
             border-radius: 3px;
+        }
+
+        pre code {
+            background: none;
+        }
+
+        pre,
+        code,
+        .token {
+            font-family: var(--code-font) !important;
+        }
+
+        blockquote {
+            background-color: rgb(219, 244, 255) !important;
+            margin: 2.4rem auto;
+            border-radius: 5px;
+            border-left: .4rem solid var(--primary-color);
+            padding: .15rem 1.2rem;
+            font-weight: 500;
+        }
+
+        li {
+            font-size: 1.2rem;
+            color: var(--text-color);
+            list-style-type: disk;
+        }
+
+        pre {
+            background: whitesmoke;
+            padding: 2rem;
+            font-size: 18px !important;
+            border-radius: .3rem;
+            border-left: .3rem solid var(--primary-color);
+        }
+
+        .toolbar-item button {
+            color: white !important;
+            background: transparent !important;
+            box-shadow: none !important;
+        }
+
+        .toolbar-item button span {
+            box-shadow: 0px 0px 11px 1px rgb(212, 212, 212) !important;
+            cursor: pointer !important;
+            background: #00d0ff !important;
+            color: whitesmoke !important;
+            padding: 7px 20px !important;
+            transition: .5s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .toolbar-item button span:hover {
+            background: #00b2da !important;
         }
 
         @media (max-width: 420px) {
@@ -89,9 +217,16 @@
 </head>
 
 <body>
-    <div class="content">
-        <%- include('../public/index.ejs')%>
+    <div class="main-body">
+        <div class="content">
+            <%- include('../public/index.ejs')%>
+        </div>
     </div>
+    <div class="mode">
+        <img src="">
+    </div>
+
+    <script src="prism/prism.js"></script>
 
 </body>
 
